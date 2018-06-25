@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+
+		<commentGenerator>
+			<!-- 是否生成注释代时间戳-->
+			<property name="suppressDate" value="true"/>
+			<!-- 是否取消注释 -->
+			<property name="suppressAllComments" value="true"/>
+		</commentGenerator>
+
+		<!-- 数据库信息 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://127.0.0.1:3306/test" userId="root"
+			password="123456">
+		</jdbcConnection>
+
+		<!-- 类型之间的转换 -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- 生成实体类的位置 -->
+		<javaModelGenerator targetProject=".\src\main\java" targetPackage="com.yiman.entity">
+			<!-- 是否在当前路径下新加一层schema,eg：fase路径src\main\java， true:src\main\java\[com.yiman.entity] -->
+			<property name="enableSubPackages" value="true" />
+			<!-- 设置是否在getter方法中，对String类型字段调用trim()方法 -->
+			<property name="trimStrings" value="true " />
+		</javaModelGenerator>
+
+		<!-- 生成xml的位置 -->
+		<sqlMapGenerator targetProject=".\src\main\resources" targetPackage="com.yiman.xml">
+			<property name="enableSubPackages" value="true " />
+		</sqlMapGenerator>
+
+		<!-- 生成mapper接口的位置 -->
+		<javaClientGenerator type="XMLMAPPER" targetProject=".\src\main\resources" targetPackage="com.yiman.mapper" >
+			<property name="enableSubPackages" value="true " />
+		</javaClientGenerator>
+
+		<!-- 数据对应的表名 -->
+		<table tableName="activity_detail" domainObjectName="ActivityDetail"></table>
+
+	</context>
+</generatorConfiguration>

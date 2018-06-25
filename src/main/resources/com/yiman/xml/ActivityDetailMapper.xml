@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yiman.mapper.ActivityDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.yiman.entity.ActivityDetail" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="total_reward" property="totalReward" jdbcType="INTEGER" />
+    <result column="top_reward" property="topReward" jdbcType="INTEGER" />
+    <result column="start_date" property="startDate" jdbcType="TIMESTAMP" />
+    <result column="expire_date" property="expireDate" jdbcType="TIMESTAMP" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="order_index" property="orderIndex" jdbcType="TINYINT" />
+    <result column="begin_reward_date" property="beginRewardDate" jdbcType="TIMESTAMP" />
+    <result column="end_reward_date" property="endRewardDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, description, total_reward, top_reward, start_date, expire_date, type, order_index, 
+    begin_reward_date, end_reward_date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yiman.entity.ActivityDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from activity_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from activity_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from activity_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yiman.entity.ActivityDetailExample" >
+    delete from activity_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yiman.entity.ActivityDetail" >
+    insert into activity_detail (id, description, total_reward, 
+      top_reward, start_date, expire_date, 
+      type, order_index, begin_reward_date, 
+      end_reward_date)
+    values (#{id,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{totalReward,jdbcType=INTEGER}, 
+      #{topReward,jdbcType=INTEGER}, #{startDate,jdbcType=TIMESTAMP}, #{expireDate,jdbcType=TIMESTAMP}, 
+      #{type,jdbcType=VARCHAR}, #{orderIndex,jdbcType=TINYINT}, #{beginRewardDate,jdbcType=TIMESTAMP}, 
+      #{endRewardDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yiman.entity.ActivityDetail" >
+    insert into activity_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="totalReward != null" >
+        total_reward,
+      </if>
+      <if test="topReward != null" >
+        top_reward,
+      </if>
+      <if test="startDate != null" >
+        start_date,
+      </if>
+      <if test="expireDate != null" >
+        expire_date,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="orderIndex != null" >
+        order_index,
+      </if>
+      <if test="beginRewardDate != null" >
+        begin_reward_date,
+      </if>
+      <if test="endRewardDate != null" >
+        end_reward_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="totalReward != null" >
+        #{totalReward,jdbcType=INTEGER},
+      </if>
+      <if test="topReward != null" >
+        #{topReward,jdbcType=INTEGER},
+      </if>
+      <if test="startDate != null" >
+        #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expireDate != null" >
+        #{expireDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="orderIndex != null" >
+        #{orderIndex,jdbcType=TINYINT},
+      </if>
+      <if test="beginRewardDate != null" >
+        #{beginRewardDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endRewardDate != null" >
+        #{endRewardDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yiman.entity.ActivityDetailExample" resultType="java.lang.Integer" >
+    select count(*) from activity_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update activity_detail
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalReward != null" >
+        total_reward = #{record.totalReward,jdbcType=INTEGER},
+      </if>
+      <if test="record.topReward != null" >
+        top_reward = #{record.topReward,jdbcType=INTEGER},
+      </if>
+      <if test="record.startDate != null" >
+        start_date = #{record.startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.expireDate != null" >
+        expire_date = #{record.expireDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderIndex != null" >
+        order_index = #{record.orderIndex,jdbcType=TINYINT},
+      </if>
+      <if test="record.beginRewardDate != null" >
+        begin_reward_date = #{record.beginRewardDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endRewardDate != null" >
+        end_reward_date = #{record.endRewardDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update activity_detail
+    set id = #{record.id,jdbcType=INTEGER},
+      description = #{record.description,jdbcType=VARCHAR},
+      total_reward = #{record.totalReward,jdbcType=INTEGER},
+      top_reward = #{record.topReward,jdbcType=INTEGER},
+      start_date = #{record.startDate,jdbcType=TIMESTAMP},
+      expire_date = #{record.expireDate,jdbcType=TIMESTAMP},
+      type = #{record.type,jdbcType=VARCHAR},
+      order_index = #{record.orderIndex,jdbcType=TINYINT},
+      begin_reward_date = #{record.beginRewardDate,jdbcType=TIMESTAMP},
+      end_reward_date = #{record.endRewardDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yiman.entity.ActivityDetail" >
+    update activity_detail
+    <set >
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="totalReward != null" >
+        total_reward = #{totalReward,jdbcType=INTEGER},
+      </if>
+      <if test="topReward != null" >
+        top_reward = #{topReward,jdbcType=INTEGER},
+      </if>
+      <if test="startDate != null" >
+        start_date = #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expireDate != null" >
+        expire_date = #{expireDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="orderIndex != null" >
+        order_index = #{orderIndex,jdbcType=TINYINT},
+      </if>
+      <if test="beginRewardDate != null" >
+        begin_reward_date = #{beginRewardDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endRewardDate != null" >
+        end_reward_date = #{endRewardDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yiman.entity.ActivityDetail" >
+    update activity_detail
+    set description = #{description,jdbcType=VARCHAR},
+      total_reward = #{totalReward,jdbcType=INTEGER},
+      top_reward = #{topReward,jdbcType=INTEGER},
+      start_date = #{startDate,jdbcType=TIMESTAMP},
+      expire_date = #{expireDate,jdbcType=TIMESTAMP},
+      type = #{type,jdbcType=VARCHAR},
+      order_index = #{orderIndex,jdbcType=TINYINT},
+      begin_reward_date = #{beginRewardDate,jdbcType=TIMESTAMP},
+      end_reward_date = #{endRewardDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
